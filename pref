@@ -1,0 +1,55 @@
+(function() {
+    const baseTargetURL_CGU = "https://www.rdv-prefecture.interieur.gouv.fr/rdvpref/reservation/demarche/3887/cgu";
+    const baseTargetURL_Creneau = "https://www.rdv-prefecture.interieur.gouv.fr/rdvpref/reservation/demarche/3887/creneau";
+
+    // Check if the current URL starts with the /cgu page
+    if (window.location.href.startsWith(baseTargetURL_CGU)) {
+        
+        // Function to check if the button is enabled and click it
+        function checkButton() {
+            const button = document.querySelector("#contenu > section > div > div > form > div.row.justify-center.q-mt-md.q-gutter-md > button");
+
+            if (button) {
+                if (!button.disabled) {
+                    button.click();
+                    console.log("Button clicked!");
+                } else {
+                    setTimeout(checkButton, 3000); // Keep checking every 500ms
+                }
+            } else {
+                setTimeout(checkButton, 3000); // Keep checking every 500ms if button is not found
+            }
+        }
+
+        checkButton(); // Start checking the button status
+    }
+
+    // Check if the current URL starts with the /creneau page
+    if (window.location.href.startsWith(baseTargetURL_Creneau)) {
+        
+        // Function to check if "Aucun créneau disponible" exists on the page
+        function checkCreneau() {
+            const pageText = document.body.innerText || ""; // Get all visible text from the body
+
+            if (!pageText.includes("Aucun créneau disponible")) {
+                // If the sentence is not found, send notification to NTFY
+                fetch("https://ntfy.sh/muda", {
+                    method: "POST",
+                    body: "Creneau found!",
+                }).then(() => {
+                    console.log("Notification sent!");
+                }).catch((error) => {
+                    console.error("Error sending notification:", error);
+                });
+            } else {
+                // If the sentence is found, reload the page after 10 seconds
+                console.log("No slots available. Reloading page in 10 seconds...");
+                setTimeout(() => {
+                    window.location.reload();
+                }, 10000); // Reload after 10 seconds (10,000ms)
+            }
+        }
+
+        checkCreneau(); // Run the check for available slots
+    }
+})();
