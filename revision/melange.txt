@@ -1,0 +1,16 @@
+handler exception resolver
+throw new exceptin in HTTP
+
+controler advice, : gerer touts les controlleurs,
+
+custom repository:  à voir
+
+arraylist vs linkedlist
+
+@transaction; kifeh spring yaaref enha instance spring, 
+
+hashmap: recherche plus rapide,
+bdd: 3lech index, 
+ 
+sql explain: c quoi ? : taatik bilan taa posgres kifeh 9a3ed y traiti el requete mta3ek, 9adh men ligne bech traja3, 9adeh wa9t
+ 

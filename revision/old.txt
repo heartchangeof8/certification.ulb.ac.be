@@ -1,0 +1,141 @@
+jdk vs jre pas compilateur
+jvm bytecode
+declare des library externe
+class-path -> maven
+comment indiquer la class path avec une ligne de commande
+comment indiquer la taille de chaque classe
+
+memoire : stack et heap
+heap se decompose de sous ensemble
+
+the stack is used for managing method calls and local variables, 
+and it's relatively small and organized. The heap, on the other hand, is a larger, 7
+more flexible space used for dynamically allocated objects, and it's managed by the garbage collector.
+
+Algo de garbage collector
+
+XMX, XMS -> taille de memoir a le heap
+_______________________
+abstract vs concrete difference
+polymorphisme compile time
+@overriding -> heritage_
+
+polymorphisme compilation : @Overloading
+
+@hashcode puis @equals
+
+map -> get depend de complexité, depend de tailler de map :
+interieur de hasmap, cercle, immplementation de hashmap.
+
+
+collect.toMap -> 4 methodes
+paraller -> combien de thread
+for join -> multithreading -> deux corps par cpu
+
+
+patterne "command" 
+
+
+stack -> garde la reference de l'appel -> node Js -> find 100000 fois, stauck
+
+class loading -> static instancié
+class path
+
+
+scope singleton : spring vs patterne
+scope singleton Java : unique dans toute le JVM, 
+scope spring: dans le cadre de l'application context 
+
+
+creer new web app avec l'ancien spring
+
+plan d'executation d'une request -> sql
+encapsuler sql
+
+
+chemin normalisé ->
+denormalisez -> dupliquer les données au lieux de faire une jointure :
+
+Explain plan -> sql -> avoir des données  -> executation plan 
+
+
+____________________
+
+
+
+spring MVC
+web.xml : declaré la servlet , mapping
+faire une class de config (ou par xml) : 
+-java config @enableMVN @Configuration : declaré le view controler
+-par xml : defini view resolver
+
+par sprin boot config
+-add     <artifactId>spring-boot-starter-parent</artifactId>
+-@SpringBootApplication
+-------------------------------
+
+MS : tolerance au panne, techno limité, modification couteuse, cout de tets elevé
+API Gateway : zuul proxy -> pt d'entré
+
+discovery service : eureka (service d'nregsitrement) : ribbon load balancing : pour répartir la
+charge entre plusieurs instances de microservice
+
+kafka use zookeeper (discovery service) contrairement à rabbitMq
+
+feign -> selon eureke ya3ref l'@ de MS -> communication syhcnrone entre les MS
+DDD(selon metier) vs Data Ownership (selon la bdd)
+Hystrix -> disponibilité de MS : tolerance au panne
+
+etape: les MS s'enregsitre dans l eureka (service discovery)
+
+circuit braker (feign):  Si la première instance de microservice administration est en panne le
+circuit breaker dirige le microservice vers une autre instance
+-------------------------------
+
+J2EE
+spring c un framework open source JEE pour les appl n-tiers,c un conteneur leger
+prend en charge la creation d'objet et la mis en relation les objets
+par l'intermediaire d'un fichier de config qui decrit les objets et les dependence
+
+spring est modulaire: permet de choisir les modules approprié sans ere obligé d'use le rest
+fournit plus de 20 modules
+
+serveur d'application : glassfich, tomcat, websphere, jboss
+framework pour injection de dependence : EJB (lourd) , spring (faible)
+
+framework :
+ORM : hibernate, JPA, toplink
+application web : JSF, strust, spring MVC
+
+Middleware :
+RMI, CORBA : app distrbué
+jaxRs, jaxWS, JMS
+
+
+spring core containser contient 4 compostant 
+core module : 
+*spring IOC (injection de dependence)
+
+Spring Bean Scopes (factory):
+singleton – Only one instance of the bean will be created for each container
+prototype – A new instance will be created every time the bean is requested
+request – This is same as prototype scope, however it’s meant to be used for web applications.
+session – A new bean will be created for each HTTP session by the container
+global-session – This is used to create global session beans for Portlet applications
+
+*context : get bean 
+*EXPRESSION LANGUAGE : @Value("#{2 > 1 ? 'a' : 'b'}") // "a"
+
+---
+module spring AOP Aspect Oriented Programming Core Concepts
+@before
+@after
+---
+spring bean xml
+web.xml
+----
+
+spring s'appuie sur 3 concepts:
+IOC - AOP - et
+ couche d'abstraction (interface, DAO implement):Grâce à l'abstraction, les modules de haut niveau ne dépendent plus de l'implémentation
+ faites dans les modules de plus bas niveau, mais seulement de l'abstraction. 

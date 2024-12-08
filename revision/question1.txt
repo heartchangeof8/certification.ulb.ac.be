@@ -1,0 +1,29 @@
+Questions posées lors de l’entretien :
+
+truncate vs delete
+two types of cursor in sql
+oracle upsert vs merge
+
+Est-ce que vous avez fait des tests unitaires ? avec quel outils ? quelle couverture avez-vous ?
+Qu’est ce qui garantie la bonne couverture des tests ?
+Définition des émergences qui pousse la garantie de code ?
+Est-ce que vous étiez garant des bonnes pratiques ?
+Quels sont les bonnes pratiques que vous avez mis en place lors de votre dernier projets ?
+Définition de l’architecture hexagonale ?
+Est-ce que vous avez configurer votre propre limite ? est ce que vous l’avez surcharger ?
+Est-ce que vous avez fait du UX design ?
+Est-ce que vous avez fait du design système coté front – est ce que tu as pu voir s’il y a d’autre record sur les systèmes ?
+Est-ce que tu as pu mesurer l’impact de la migration sur les systèmes
+Est-ce que tu as fait du redux ?
+Est-ce que tu es prêts à t’adapter à un environnement technique entre le back et le front ?
+Qu’est ce qui te motive aujourd’hui et qu’est ce que tu cherche comme nouvelle opportunités à ce jour ?
+Pourquoi tu es à l’écoute du marché ?
+Si aujourd’hui tu dois créer une nouvelles applications avec de nouvelles technologies, quels choix d’architecture et qu’elle couche métiers vous allez choisir ?
+Est-ce que tu es mis en place des design patterns ?
+Est-ce que tu as fais du TDD / BDD ?
+Pour toi quel est la bonne couverture de test coté back end ?
+As-tu fais des tests coté front ?
+Est-ce qu’il y avait une sensibilité à la performance lors des tes applications cotés front ?
+Comment tu peux définir une microservices ?
+C’est quoi la différence entre les différents composants d’un microservice ?
+Comment il communique entre eux ?

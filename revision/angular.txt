@@ -1,0 +1,172 @@
+Angular is a JS binding framework which bind HTML and Models
+html(v)<->(vm)<->object(m) :  mvvm, mvc
+helps you to build a SPA (single page appl) using concerpts
+of routing, contains other features like http, di (dependency
+injection), input output etc ...
+___________________
+AngularJs vs Angular
+JS vs TS
+Controller(MVC) vs component(service/controller) (archticture)
+0 vs CLI
+0 vs mobile friendly
+0 vs Lazy loading
+0 vs SEO (search engine optioisation) with metadata
+___________________
+Directives in angular
+Directives changes the behavior of HTML DOM
+(exple : ngModel, {{value}}, [hidden]...
+___________________
+different type of directives (SAC)
+
+Strctural directive
+change the DOM layout by adding and removing elements
+exple : *ngFor
+
+Attribute directive
+change the appearance and behaviour of HTML elements
+exple : [hidden] = "hide()"
+
+Component directive @Directives
+directives with templates, it's like a user component
+exple : <my-grid [grid-data]="selectlol"></my-grid>
+has it's own component (ui)
+___________________
+npm : node package manager, make instalation of js
+library or framework easy
+___________________
+package.json file
+has all referenecs needed for a project, version
+___________________
+TS is a superset of Js, added type to JS
+gives an OOP environement
+___________________
+angularCli create and initialize project templates
+rather than starting from scartch
+___________________
+importance of component and modules
+component is where you write your building code
+module is a group of components
+___________________
+what's a decorator in angular (annotation or MetaData)
+define what kind of angular class is it, for example:
+
+if you decorate "@Component" then it says it's an
+angular component
+
+@Injectable
+
+if you put "@NgModule" -> becomes angular module
+___________________
+what are template :
+it's an html view of angular which we can write directive
+
+ther's 2 ways of defining template
+"template" (inline template) or "templateUrl"
+___________________
+data bindings defines how the view and component
+communicate with each other:
+types :
+ 
+String Interpolation: pass data from model class to the template.
+
+Property Binding : [pair of square bracket]
+<input [value]='myBlog'></span>  
+
+Event Binding,
+
+Two Way Data Binding : Event+ Property : [(ngModel)]
+___________________
+Architecture of angular  
+template : HTML view of angular
+component: binds the view and model
+modules : group of component
+bindings : defines how view and component communicate
+directive: change the html DOM behaviour
+servies: helps to shar common logic across project
+DI: dependency injection helps to inject instance across construcors
+___________________
+what's SPA, using routers
+Routing is a simple collection which has two things :
+URL and which component is loaded
+routing helps you to define the navigation
+no refreshing the while UI is needed
+<router-outlet></router-outlet> and [routerLink]
+___________________
+lazy loading : on demand loading
+better performance, when user need to see the view
+___________________
+implements lazy loading:
+devide projet into modules and use loadChildren
+___________________
+define services
+help you to share common logic across projects
+
+use provider for DI
+__________________
+DI helps do decouple class dependencies,
+so when you add a new dependency, you don't need to change everywhere
+__________________
+ngServe vs ngBuild
+ngServe: build en memory
+ngBuild: for production, create a dist
+folder
+
+ngBuild --prod :
+compress JS file, removes comments,
+removes all unnecessary things
+__________________
+asynch pipe
+__________________
+angular Forms:
+
+Raective forms :(import FormControl)
+more explicit
+created in component class
+structured
+Sychronous
+form validation : functions
+immutable
+
+template-driven: (import FormsModule for [(ngModule)])
+less explicit, created by directive
+unstructured
+asychronous
+directive
+mutable
+__________________
+ loading strategies :
+ Eeager-loading : load after the app starts
+ lazy-loading : load on demande after the app starting
+ Pre-loading : loaded automatically after the app starts
+__________________
+
+
+
+__________________
+@ViewChild vs @ViewChildren : collection of same component
+
+@Input in child, <child [loggedIn]="userLoggedIn"></child>
+
+templateReferenceVariable -> accés au child from parent and all its methods, #child
+@ViewChild ChildComponent -> the same but in the TS 
+
+
+from child to parent : @ouptput x = new EventEmitter, .emit()
+__________________
+
+param router : snapshot Approche does not get the param when you refresh, it's get the old one
+use : this.route.paramMap.subscribe()
+__________________
+ Life Cycle Hooks
+ ngOnDestroy : unsubscrible from observable
+ par ordre: ngOnChanges -> ngOnInit -> ngAfterViewInit -> ngOnDestroy
+ __________________
+ 
+ Constructor vs ngOnInit()
+ 
+ test purpose, can't mock construcors
+ @ViewChild templateRef is not inialized yet in constructor
+ 
+ 
+ in java 21, i have this interface here `public @interface WithSgConnectUser { String clientId() default "TEST_CLIENT_ID"; String subject() default "john.doe@sgcib.com";}
+

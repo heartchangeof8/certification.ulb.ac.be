@@ -1,0 +1,63 @@
+
+Quelle est la différence entre HashMap et Hashtable ?
+Réponse :
+HashMap n'est pas synchronisée et permet une clé null et plusieurs valeurs null. Elle est plus rapide que Hashtable en raison de l'absence de synchronisation intégrée.
+Hashtable est synchronisée, donc thread-safe, mais n'autorise ni les clés null ni les valeurs null. Elle est plus lente à cause de la synchronisation intégrée.
+_________________
+
+Comment rendre une collection thread-safe en Java ?
+List<String> synchronizedList = Collections.synchronizedList(new ArrayList<>());
+Set<String> synchronizedSet = Collections.synchronizedSet(new HashSet<>());
+Map<String, String> synchronizedMap = Collections.synchronizedMap(new HashMap<>());
+
+Pour des collections plus performantes en environnement multithread, utilisez les classes de java.util.concurrent,
+_________________
+runnable vs Callable
+Valeur de Retour : Runnable n'a pas de valeur de retour, tandis que Callable peut retourner un résultat de type générique (V).
+
+Exceptions : Runnable ne peut pas lancer d'exceptions vérifiées, tandis que Callable peut lancer une exception vérifiée via la méthode call().
+
+En résumé, utilisez Runnable pour des tâches simples sans valeur de retour et sans exceptions vérifiées, tandis que Callable est approprié lorsque 
+vous avez besoin de récupérer un résultat de la tâche ou de gérer des exceptions vérifiées.
+
+_________________
+
+Comparable (intergace, method: compareTo) vs Comparator (lambda)
+_________________
+Spring Actuator facilite le monitoring et la gestion des applications Spring Boot, en fournissant des informations détaillées et des métriques 
+qui sont essentielles pour le diagnostic, la surveillance des performances et l'administration des applications en production.
+_________________
+There are two Threads A and B operating on a shared resource R, A needs to inform B that some important changes has happened in R. 
+What technique would you use in Java to achieve this?
+=> synchronization and inter-thread communication
+_________________
+
+@Controller + @ResponseBody => @RestControler
+_________________
+Rest (architecture) vs soap (protocole)
+_________________
+comment merger des collections: 
+*List<String> mergedList = new ArrayList<>(list1);mergedList.addAll(list2);
+*Stream.concat(list1.stream(), list2.stream()).collect(Collectors.toList());
+_________________
+pour qu'un microservice puisse gérer efficacement la charge et maintenir de bonnes performances, :
+-Allocation de ressources : Assurez-vous que chaque instance du microservice a suffisamment de CPU, de mémoire et de capacité de stockage
+-Gestion des requêtes et des threads (Thread Pool, Timeouts)
+-Cache et optimisations de performances (cache, Optimisation des requêtes sql)
+-Tolérance aux pannes et résilience (circuit breaker)
+_________________
+Jackson : la sérialisation et la désérialisation des objets Java en formats de données comme JSON (JavaScript Object Notation) et XML (eXtensible Markup Language)
+@JsonProperty, @JsonIgnore, @JsonCreator
+_________________
+mockMvc.perform(MockMvcRequestBuilders.get("/api/users/{userId}", 1))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("John Doe"))
+_________________
+En pratique, mvn install est généralement utilisé pendant le développement local, tandis que mvn deploy est utilisé pour publier des artefacts dans un référentiel partagé (Nexus)
+_________________
+map default function computeIfAbsent : si ça existe pâs, ou si le clé est associé à) une valeur null, alors il va le remplacer, sinon il retou_rne le resultat
+_________________
+swagger: @Api,     @ApiOperation(value = "Récupérer un utilisateur par ID", response = User.class)
+ @ApiParam(value = "ID de l'utilisateur à récupérer", required = true), @ApiResponse
+ _________________
+ cocumber annotation: given, when, then, And 

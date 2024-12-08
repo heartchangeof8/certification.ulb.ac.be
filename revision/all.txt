@@ -1,0 +1,320 @@
+GET vs POST
+Get can be cached / POST can't
+Get have data length restrictions / POST does not have
+_______________________
+Stateless Beans ne sont pas liés à un client et
+il n'y a aucune garantie pour un client d'obtenir la même instance à chaque appel de méthode (authentification)
+
+Stateful Beans sont dédiés à un client pour toute sa vie  (panier)
+_______________________
+PUT vs PATCH  =>
+PUT : obligé tu passes tout les params, sinon yefhmo NULL,
+PATCH: si tu passes un seul param, ça ne vas pas ecrasé les autres champs
+user : username, email, password
+_______________________
+PO: heritage, encapsulation, polymorphism
+_______________________
+Association  A---->B
+Composition  A-----<filled>B (suivre le cycle de vie)
+Aggregation  A-----<>B
+_______________________
+A 1..* B -> : B has the foreign key of A
+_______________________
+steps involved in a typical database connection life cycle, we'll understand why:
+*Opening a connection to the database using the database driver
+*Opening a TCP socket for reading/writing data
+*Reading / writing data over the socket
+*Closing the connection
+*Closing the socket
+too expensive : use "pool connection" (datasource) -> Reusing connections
+_______________________
+TCP: Transmission Control Protocol est un protocole orienté connexion qui garantit que les données
+sont remises de façon fiable.
+TCP exple : courrier avec un avis de reception, detecte si un courrier est manquant etc ...
+UPD : plus rapide mais aucun garantie
+_______________________
+HTTPS : allowing the client and the server to establish an encrypted communication channel,
+and then pass the clear text HTTP messages through it
+Step to switch to htttps: install ssl certificate
+_______________________
+
+BDD
+index: pour rendre la bdd plus rapide -> lent à l'ecriture
+view: securité (choisir les champs que tu veux fourni), facilité les queries complex
+
+ ______________________
+
+ inversion de controle : creer l'objet
+ injection de depense: chercher l'objet
+ ______________________
+______________________
+SOLID principals:
+ *Single responsibility principle - Class has one job to do.
+ *Open/closed principle - Class être ouvert à l’extension mais fermé à la modification.
+ *Liskov substitution : Subtypes must be substituable for their base types
+un utilisateur de la classe de base doit pouvoir continuer de fonctionner correctement
+si une classe dérivée de la classe principale lui est fournie à la place.
+=> il ne faut pas lever d’exception imprévue (comme UnsupportedOperationException par exemple),
+ *Interface Segregation Principle: Clients should not be forced to depend on methods that they do not use
+=> diviser des interfaces en sous fonctions
+ *Dependency Inversion Principle:
+Abstractions should not depend on details. Details should depend on abstractions.
+_______________________
+Test with Spring boot
+@RunWith(SpringRunner.class)
+@Test (in methods)
+@Before public void init(){//}
+___
+*if we add  @SpringBootTest => we can add @Autowired
+*if we want to just use "some" dependencie and not all, use @contextConfiguration(service.class)
+ instead of SpringBootTest
+___
+assertThat("test").startWith("t").endWith("t").contain("e","s").containAnyOf("","").doesNotContain("","")
+Throwble throwble = catchThrowble(this::calcul)
+assertThat(throwble).hasRootCauseOf(IOexceptin.class).hasMessage("not today")
+___
+@MockBean
+private Service service ;
+ in some function :
+Mockito.when(service.getTaxeRate(income)).thenReturn(new Integer(1))
+Mockito.when(service.getTaxeRate(AdditionalMatcher.gt(4)).thenReturn(new Integer(1))
+Mockito.when(service.getTaxeRate(Mockito.anyString(), Mockito.any(lol.class))
+.thenReturn(1).thenReturn(2).thenReturn(3)
+
+use Spy when you want to test some function that use an internal (private other function
+use spy when you don't want to mock all the methods
+@SpyBean -> we decide which method to mock some method
+TaxService taxService;
+doNothing().when(taxService).functionName(any(),any());
+uu
+use @mock when you don't have to overrid a lot of inside method, need to add "when" for each method called
+use @spy when you need to call the "true" method, with the default behaviour unless you changed
+_______________________
+GIT
+
+git config --global user.email sam@google.com
+git init : créer un nouveau dépôt GIT
+git add temp.txt
+git Clone
+git commit –m “Description du commit”
+git status : affiche la liste des fichiers modifiés ainsi que les fichiers qui doivent encore être ajoutés ou validés(avant comit)
+git push origin master : Un simple push envoie les modifications locales apportées à la branche principale
+
+git checkout -b <nom-branche> creates a new branch and checks out the new branch
+git checkout <nom-branche>
+git branch : creates a new branch but leaves you on the same branch
+
+Git remote : permet à un utilisateur de se connecter à un dépôt distant
+
+Git pull : fusionner toutes les modifications présentes sur le dépôt distant dans le répertoire de travail local
+git merge <nom-branche> : est utilisée pour fusionner une branche dans la branche active.
+merge vs rebase : merge tlese9 branche m3a une autre, rebase tjib tes branches mel fou9 el master (clean history)
+
+merge: Pour fusionner des branches avec des historiques partagés.
+git checkout branche-de-destination
+git merge branche-source
+
+
+rebase: Pour intégrer des changements locaux avant de pousser. Sur des branches locales non partagées.
+git checkout branche-source
+git rebase branche-de-destination
+
+git merge : Préserve l'historique existant, indiqué pour des intégrations simples.
+git rebase : Produit un historique linéaire, adapté pour des branches locales non partagées.
+
+Git diff : permet de lister les conflits
+Git reset
+git stash : commit temporaire
+
+Interactive Rebase:
+pick: selectionner les commits
+squash  which melds the commit into the previous one (the one in the line before)
+fixup  which acts like “squash”, but discards this commit’s message
+force push to re-write history
+_______________________
+
+Hibernet 5 :
+FetchType.LAZY = This does not load the relationships unless you invoke it via the getter method.
+FetchType.EAGER = This loads all the relationships.
+
+LazyInitializationException means that you are calling the collection after the hibernate
+ session has closed, or after the object has been detached from the session
+solution1 => using DTO (to get only the fields you want for the intern collection)
+solution2 => using LEFT JOIN FETCH
+
+ORM : object-relational mapping : est un outil que joue le role d'interface entre un programme
+et bdd relationnelle pour simuler une bdd orientée objet.
+
+Hibernate uses Java APIs, like JDBC, Java Transaction API(JTA), and Java Naming and Directory Interface (JNDI)
+
+JPA (Java Persistence API) a deux niveaux de caches.
+Le cache L1 est au niveau des EntityManager -> chaque session a sa propre cache
+Le cache L2 est au niveau de L’EntityManagerFactory. -> session factory, configurable selon un provider (Caffeine )
+
+C’est-à-dire que lors de la recherche d’une entité,
+l’ORM interroge le cache L1, s’il ne trouve pas cette entité,
+il interroge le cache L2, et s’il ne la trouve toujours pas,
+une requête est exécutée.
+
+Class objects involved in Hibernate Application Architecture:
+*Configuration Object (datasource) : Database Connection & Class Mapping Setup
+*SessionFactory Object (thread safe): use config, one SessionFactory object per database using a config file
+*Session Object (not thread safe): to be instantiated each time an interaction is needed with the database
+*Transaction Object: creer par session (or entity manager)
+*Query Object: use SQL ou Query Language (HQL) : for example: number of results return
+*Criteria Object: used to create and execute queries to retrieve objects.
+
+
+HQL is to perform both select and non-select operations on the data,  
+but Criteria is only for selecting the data, we cannot perform non-select operations using criteria
+
+HQL is suitable for executing Static Queries, 
+where as Criteria is suitable for executing Dynamic Queries (join)
+
+Transaction: une serie d'action
+Transaction properties :
+*Atomicity: if one part of transaction fail -> then the whole transaction fail
+*consistency: DB should be in a valid state before and after the transaction
+*isolation: each transaction should execute in complete isolation without knowing
+the existence of other transaction.
+*Durability: once the transaction is complete, its change are permanent
+
+JPA can be seen as a bridge between object-oriented domain models and relational database systems
+Hibernate is an implementation of JPA. So, it follows the common standards provided by the JPA.
+
+
+___
+Hibernate OGM provides Java Persistence (JPA) support for NoSQL solutions.
+It reuses Hibernate ORM’s engine but persists entities into a NoSQL datastore instead
+of a relational database.
+_______________________
+
+error, exception checked and unchcked exception herite Throwable :
+checked : checked at compile time: SQLException, ClassNotFoundException
+unchcked : sub classes of RuntimeException: checkd at run time :
+nullPointerException, ArithmeticException, ArrayIndexOutOfBoundsException
+___
+Objects
+*VO Value Object : Use when need to measure the objects equality based on the objects value. like Integer
+*DTO Data Transfer Object : customer data you want to pass.  to transfer on the network
+*Plain Old Java Object :that class have only a default constructor and PRIVATE property,
+can't extends or implements, no annotation
+*Bean : same as Pojo, but it implements Serializable
+*Model : same as pojo, used in front
+*Entity : same as pojo, but use @Entity
+
+Java 8 Features :
+*forEach in List, en passant consumer
+*default and static methods in Interfaces : A.super.foo();
+*Functional Interfaces:  (lambda expression and reference function ::)
+**Functions (take param and return),bifunction (2 params, 1 return), IntFunction,
+**UnaryOperator,  BinaryOperator(2 param, one result, same type)
+**Suppliers: no arguments, return result
+**consumer: take argument, void
+**Predicates : take param, and return boolean
+*Java Stream API (Stream.of("one", "two", "three", "four"))
+**parallelStream : paralles (unlike the sequentiel), use when you have a big amount of data
+IntStream.iterate(0, i -> i + 1).parallel().skip(1).findFirst() => out of memory becaue it does
+not know about the number of iteration by default, so parallel gonna beug
+**intermediate operations: filter, map, floatMap, distinct, sorted,limit, skip, peek(debug)
+**terminal operations: collect (Collectors.toList()), count, reduce, forEach, forEachOrdered(for parallel)
+min, max, anyMatch, allMatch, noneMatch, findAny, findFirst
+*Time API : LocalDate, LocalDateTime, LocalTime
+*Collection API improvements : Map replaceAll(), collecttion.removeIf
+*Optional
+
+Java 9 Features :
+*REPL (JShell)
+*Modules : Jigsaw Project
+*Methods for Immutable List, Set, Map: List.of() => return immutable (like Collections.unmodifiableList)
+*Private or private static methods in Interfaces
+*reactive stream [x]
+*added stream() method to work on Optional :
+*add new intermediat functions to streams : dropWhile and takeWhile
+*HTTP 2 Client
+
+Java 10 Features :
+*var : can only be used to declare local variables
+*copyOf(Collection) -> return unmodifiableList
+*orElseThrow added in Optional  
+
+Java 11 Features:
+*Oracle JDK would no longer be free for commercial use
+*Running Java File with single command : javac
+*new Strings Methods: isBlank, lines , repeat(int),
+strip(), stripLeading(), stripTrailing() : same as trim, but aware of unicode
+*var in lambda : (var s1, var s2) -> s1 + s2
+
+Java 12 Features:
+*switch (return result, can use multiple args, lambda expression)
+*Teeing : collectors.teeing( summingDouble(i -> i), counting(), (sum, count) -> sum / count))
+*String : added "indent" (for number of spaces)
+*if (obj instanceof String s) { // can use s directly here }
+
+Java 13 Features:
+*Text Blocks : textBlock = """ Hi Hello Yes""";
+*String: formatted, stripIndent,
+*switch : break was replaced by yield
+
+Java 14 Features:
+*Helpful NullPointerExceptions : the return value of "Journaldev.getBlog()" is null
+*"Record" addded : record Author (String name, String topic) {}
+
+Java 15 Features:
+*Sealed Classes : public sealed class Vehicle permits Car, Bike, Truck
+*Sealed in record  
+
+______________________
+singleton, mvc, Composite Pattern
+
+Factory Pattern:
+	define an interface or abstract class for creating an object but let the subclasses 
+	decide which class to instantiate
+
+Prototype Pattern:
+	cloning of an existing object instead of creating new one and can also be customized 
+	as per the requirement. (clone)
+
+Bridge Patterne:
+	decouple the functional abstraction from the implementation 
+	so that the two can vary independently (extends and implements):
+	circle -> red circle and green circle
+	drawCircle
+
+Decorator Pattern
+	attach a flexible additional responsibilities to an object dynamically, example:
+	interface -> creer un abstract class herite d'interface -> creer les sous classe
+	
+Proxy Pattern
+	provides the control for accessing the original object	
+
+______________________
+
+Q25. What are the steps to deploy Spring Boot web applications as JAR and WAR files?
+<artifactId>spring-boot-maven-plugin</artifactId>
+<packaging>jar</packaging>
+
+
+Create a War file
+– extends SpringBootServletInitializer & override configure method
+– Update build configuration: war
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-tomcat</artifactId>
+  <scope>provided</scope>
+</dependency>
+
+______________________
+Il y a 3 build lifecycles de base dans Maven :
+
+default : qui permet de construire et déployer le projet
+clean : qui permet de nettoyer le projet en supprimant les éléments issus de la construction de celui-ci
+site : qui permet de créer un site web pour le projet
+___
+Ces build lifecycles sont découpés en phases :
+validate : vérifie que la configuration projet est correcte (POM, pas d'éléments manquants...)
+compile : compile les sources du projet
+test : teste le code compilé avec les classes de tests unitaires contenues dans le projet
+package : package les éléments issus de la compilation dans un format distribuable (JAR, WAR...)
+install : installe le package dans votre repository local
+deploy : envoie le package dans le repository distant défini dans le POM
